@@ -1,9 +1,8 @@
 /* =====================
    RESET & BASE
-   Every browser has default styles. We clear them first.
    ===================== */
 *, *::before, *::after {
-  box-sizing: border-box; /* padding doesn't add to width — more predictable */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -14,20 +13,19 @@ body {
   color: #1a1a1a;
   min-height: 100vh;
   display: flex;
-  justify-content: center;   /* center horizontally */
+  justify-content: center;
   padding: 24px 16px;
 }
 
 /* =====================
    APP CONTAINER
-   The white card that holds everything
    ===================== */
 .app-container {
   width: 100%;
-  max-width: 720px;          /* never wider than 720px */
+  max-width: 720px;
   display: flex;
-  flex-direction: column;    /* stack children vertically */
-  gap: 12px;                 /* space between sections */
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* =====================
@@ -46,7 +44,7 @@ body {
 .logo {
   width: 32px;
   height: 32px;
-  background: #ff0000;       /* YouTube red */
+  background: #ff0000;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -54,12 +52,17 @@ body {
   color: white;
   font-size: 13px;
   font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* header-text takes available space, pushes button to the right */
+.header-text {
+  flex: 1;
 }
 
 .header-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
 }
 
 .header-sub {
@@ -67,6 +70,81 @@ body {
   color: #888;
   margin-top: 2px;
 }
+
+/* =====================
+   BUTTONS
+   ===================== */
+.btn-primary {
+  height: 38px;
+  padding: 0 18px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-primary:hover  { background: #333; }
+.btn-primary:disabled { background: #999; cursor: not-allowed; }
+
+/* Ghost button — subtle, no background */
+.btn-ghost {
+  height: 32px;
+  padding: 0 12px;
+  background: transparent;
+  color: #888;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-ghost:hover {
+  background: #f5f5f5;
+  color: #1a1a1a;
+  border-color: #ccc;
+}
+
+/* Small icon button — used for copy */
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #bbb;
+  font-size: 13px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.btn-icon:hover { color: #555; }
+
+.btn-send {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-send:hover { background: #333; }
 
 /* =====================
    URL PANEL
@@ -91,7 +169,7 @@ body {
 }
 
 .url-input {
-  flex: 1;                   /* take all available space */
+  flex: 1;
   height: 38px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -101,69 +179,26 @@ body {
   color: #1a1a1a;
   outline: none;
   transition: border-color 0.15s;
+  min-width: 0;             /* allows flex shrinking on small screens */
 }
 
-.url-input:focus {
-  border-color: #4a90e2;     /* blue highlight when user clicks in */
-}
-
-/* =====================
-   BUTTONS
-   ===================== */
-.btn-primary {
-  height: 38px;
-  padding: 0 18px;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s;
-}
-
-.btn-primary:hover {
-  background: #333;
-}
-
-.btn-primary:disabled {
-  background: #999;
-  cursor: not-allowed;
-}
+.url-input:focus { border-color: #4a90e2; }
 
 /* =====================
    STATUS MESSAGE
-   The "247 chunks ready" pill
    ===================== */
 .status-message {
   margin-top: 10px;
   font-size: 12px;
   padding: 5px 12px;
-  border-radius: 99px;       /* pill shape */
+  border-radius: 99px;
   display: inline-block;
 }
 
-.status-message.success {
-  background: #e8f5e9;
-  color: #2e7d32;
-}
-
-.status-message.error {
-  background: #ffebee;
-  color: #c62828;
-}
-
-.status-message.loading {
-  background: #e3f2fd;
-  color: #1565c0;
-}
-
-/* hidden class — JS adds/removes this to show/hide elements */
-.hidden {
-  display: none !important;
-}
+.status-message.success { background: #e8f5e9; color: #2e7d32; }
+.status-message.error   { background: #ffebee; color: #c62828; }
+.status-message.loading { background: #e3f2fd; color: #1565c0; }
+.hidden { display: none !important; }
 
 /* =====================
    CHAT AREA
@@ -173,22 +208,22 @@ body {
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   padding: 16px;
-  /* Fixed height with scroll — messages don't push the page taller */
   height: 420px;
-  overflow-y: auto;          /* scroll when messages overflow */
+  overflow-y: auto;
+  scroll-behavior: smooth;  /* smooth auto-scroll */
 }
 
 .messages {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .welcome-message {
   text-align: center;
-  color: #999;
+  color: #bbb;
   font-size: 13px;
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 /* =====================
@@ -200,10 +235,7 @@ body {
   gap: 10px;
 }
 
-/* User messages sit on the right */
-.message.user {
-  flex-direction: row-reverse;
-}
+.message.user { flex-direction: row-reverse; }
 
 .avatar {
   width: 30px;
@@ -214,24 +246,27 @@ body {
   justify-content: center;
   font-size: 11px;
   font-weight: 600;
-  flex-shrink: 0;            /* never squish the avatar */
+  flex-shrink: 0;
 }
 
-.avatar.ai {
-  background: #e3f2fd;
-  color: #1565c0;
+.avatar.ai   { background: #e3f2fd; color: #1565c0; }
+.avatar.user { background: #f3e5f5; color: #6a1b9a; }
+
+/* Wrapper holds the bubble + timestamp + copy button */
+.bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  gap: 4px;
 }
 
-.avatar.user {
-  background: #f3e5f5;
-  color: #6a1b9a;
-}
+.message.user .bubble-wrapper { align-items: flex-end; }
 
 .bubble {
-  max-width: 75%;
   padding: 10px 14px;
   font-size: 13px;
   line-height: 1.6;
+  word-break: break-word;   /* prevents long words from overflowing */
 }
 
 .bubble.ai {
@@ -246,37 +281,36 @@ body {
   color: #1a1a1a;
 }
 
-/* =====================
-   TYPING INDICATOR
-   The animated dots while AI is thinking
-   ===================== */
-.typing-indicator {
+/* Timestamp shown under each bubble */
+.message-meta {
   display: flex;
-  gap: 4px;
   align-items: center;
-  padding: 12px 14px;
-  background: #f5f5f5;
-  border-radius: 4px 12px 12px 12px;
+  gap: 6px;
+  padding: 0 4px;
 }
 
-.typing-indicator span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #999;
-  animation: bounce 1.2s infinite;
-}
-
-.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes bounce {
-  0%, 80%, 100% { transform: translateY(0); }
-  40%           { transform: translateY(-5px); }
+.timestamp {
+  font-size: 11px;
+  color: #bbb;
 }
 
 /* =====================
-   INPUT BAR (bottom)
+   TYPING / STREAMING CURSOR
+   ===================== */
+.bubble.ai.streaming::after {
+  content: "▋";
+  animation: blink 0.8s step-end infinite;
+  color: #aaa;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* =====================
+   INPUT BAR
    ===================== */
 .input-bar {
   background: #ffffff;
@@ -295,27 +329,59 @@ body {
   font-size: 14px;
   color: #1a1a1a;
   outline: none;
+  min-width: 0;
 }
 
-.question-input::placeholder {
-  color: #bbb;
+.question-input::placeholder { color: #bbb; }
+
+/* =====================
+   RESPONSIVE — TABLET (max 640px)
+   ===================== */
+@media (max-width: 640px) {
+  body {
+    padding: 12px 10px;   /* less padding on small screens */
+  }
+
+  .header {
+    padding: 12px 14px;
+  }
+
+  .header-title { font-size: 14px; }
+  .header-sub   { display: none; }  /* hide subtitle on small screens */
+
+  .btn-ghost {
+    font-size: 11px;
+    padding: 0 8px;
+  }
+
+  .chat-area {
+    height: 360px;        /* shorter chat on phone */
+  }
+
+  .bubble-wrapper {
+    max-width: 88%;       /* bubbles can be wider on small screens */
+  }
+
+  .url-row {
+    flex-direction: column;  /* stack URL input and button vertically */
+  }
+
+  .btn-primary {
+    width: 100%;             /* button full width when stacked */
+    justify-content: center;
+  }
 }
 
-.btn-send {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s;
-}
+/* =====================
+   RESPONSIVE — PHONE (max 400px)
+   ===================== */
+@media (max-width: 400px) {
+  .avatar {
+    display: none;           /* hide avatars on very small screens */
+  }
 
-.btn-send:hover {
-  background: #333;
+  .chat-area {
+    height: 320px;
+    padding: 12px;
+  }
 }
