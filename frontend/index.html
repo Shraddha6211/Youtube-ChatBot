@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- The entire app lives in this one container -->
+  <div class="app-container">
+
+    <!-- TOP: Header bar -->
+    <header class="header">
+      <div class="logo">YT</div>
+      <div>
+        <h1 class="header-title">YouTube Chat</h1>
+        <p class="header-sub">Ask anything about any video</p>
+      </div>
+    </header>
+
+    <!-- MIDDLE TOP: URL input panel -->
+    <section class="url-panel">
+      <label class="url-label">Paste a YouTube URL to get started</label>
+      <div class="url-row">
+        <!--
+          id="url-input" lets JavaScript find this element.
+          That's the only reason id exists — as a JS handle.
+        -->
+        <input
+          type="text"
+          id="url-input"
+          class="url-input"
+          placeholder="https://youtube.com/watch?v=..."
+        />
+        <!--
+          onclick="loadVideo()" calls a JS function when clicked.
+          We'll define loadVideo() in app.js.
+        -->
+        <button class="btn-primary" onclick="loadVideo()">Load video</button>
+      </div>
+      <!--
+        This div starts hidden. JavaScript will show it
+        and fill it with text after the video loads.
+      -->
+      <div id="status-message" class="status-message hidden"></div>
+    </section>
+
+    <!-- MIDDLE: Chat messages appear here -->
+    <section class="chat-area" id="chat-area">
+      <!--
+        This div is the scrollable message feed.
+        JavaScript will add new message elements inside here.
+      -->
+      <div class="messages" id="messages">
+        <!-- Welcome message shown before any video is loaded -->
+        <div class="welcome-message">
+          <p>Load a YouTube video above to start chatting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM: Message input bar -->
+    <footer class="input-bar">
+      <input
+        type="text"
+        id="question-input"
+        class="question-input"
+        placeholder="Ask something about this video…"
+        <!--
+          onkeydown lets the user press Enter to send,
+          instead of having to click the button every time.
+        -->
+        onkeydown="handleEnter(event)"
+      />
+      <button class="btn-send" onclick="sendMessage()" aria-label="Send">
+        &#8594; <!-- → arrow character -->
+      </button>
+    </footer>
+
+  </div>
+
+  <!--
+    Script tag at the BOTTOM of body — not in <head>.
+    Why? HTML loads top to bottom. If JS loads before the HTML elements
+    exist, it can't find them. Bottom placement = elements exist first.
+  -->
+  <script src="app.js"></script>
+</body>
+</html>
