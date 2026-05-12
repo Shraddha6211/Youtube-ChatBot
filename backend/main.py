@@ -2,30 +2,30 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-# Import your route files (we'll build these next)
-# from backend.api.routes import chat, video
+from backend.api.routes import video, chat
 
 app = FastAPI(
     title="YouTube Chat API",
-    description="Ask questions about any YouTube video",
+    description="Ask questions about any YouTube video using RAG",
     version="1.0.0"
 )
 
-# CORS — allows your frontend (different port) to talk to this backend
-# Without this, browsers block the request for security reasons
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],      # In production: specify your domain
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Register routes — now /video/index and /chat/ask exist
+app.include_router(video.router)
+app.include_router(chat.router)
+
 @app.get("/")
 async def root():
-    return {"message": "YouTube Chat API is running"}
+    return {"message": "YouTube Chat API is running", "docs": "/docs"}
 
 @app.get("/health")
-async def health_check():
+async def health():
     return {"status": "healthy"}

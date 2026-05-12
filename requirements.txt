@@ -8,3 +8,5 @@ youtube-transcript-api
 python-dotenv
 langchain-community
 openai
+yt-dlp
+faiss-gpu
