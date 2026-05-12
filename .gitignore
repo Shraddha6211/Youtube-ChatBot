@@ -1,0 +1,19 @@
+# .gitignore
+
+# Virtual environment — never upload this
+venv/
+
+# Secret keys — NEVER upload this
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
